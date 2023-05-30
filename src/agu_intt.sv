@@ -1,4 +1,4 @@
-module agu (
+module agu_intt (
   input logic clk_i,
   input logic ntt,
   output logic [7:0] cost_address, ntt_addrA_o, ntt_addrB_o,
@@ -33,21 +33,21 @@ module agu (
   // Initialization
   initial begin
     state = INIT;
-    len = 128;
+    len = 1;
     start = 0;
     j = 0;
-    k = 1;
+    k = 255;
     wren_o = 0;
   end
 
   // Sequential logic
-  always_ff @(posedge clk_i or posedge ntt) begin
-    if (!ntt) begin
+  always_ff @(posedge clk_i or negedge ntt) begin
+    if (ntt) begin
       state <= INIT;
-      len <= 128;
+      len <= 1;
       start <= 0;
       j <= 0;
-      k <= 1;
+      k <= 255;
     end else begin
       state <= next_state;
       case (state)
@@ -57,10 +57,10 @@ module agu (
           j <= start;
         UPDATE_START: begin
           start <= j + len + 1;
-          k <= k + 1;
+          k <= k - 1;
         end
         UPDATE_LEN:
-          len <= len >> 1;
+          len <= len << 1;
         RESET_START:
           start <= 0;
         default:;
@@ -90,7 +90,7 @@ module agu (
       STALL:
         next_state = (start < N) ? RESET_J : UPDATE_LEN;
       UPDATE_LEN:
-        next_state = (len > 0) ? RESET_START : FINISH;
+        next_state = (len < 256) ? RESET_START : FINISH;
       FINISH:
         next_state = FINISH; 
       default:
@@ -103,4 +103,5 @@ module agu (
   assign cost_address = k;
   assign ntt_addrA_o = j;
   assign ntt_addrB_o = j + len;
-endmodule: agu
+endmodule: agu_intt
+

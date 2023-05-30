@@ -15,9 +15,8 @@ class Vtop___024root final : public VerilatedModule {
     // DESIGN SPECIFIC STATE
     VL_IN8(clk_i,0,0);
     VL_IN8(ntt,0,0);
-    CData/*7:0*/ top__DOT__dut__DOT__ntt_addr2;
-    CData/*7:0*/ top__DOT__dut__DOT__intt_addr1;
-    CData/*7:0*/ top__DOT__dut__DOT__intt_addr2;
+    CData/*7:0*/ top__DOT__dut__DOT__addr1;
+    CData/*7:0*/ top__DOT__dut__DOT__addr2;
     CData/*0:0*/ top__DOT__dut__DOT__intt_wren;
     CData/*0:0*/ top__DOT__dut__DOT__ntt_wren;
     CData/*0:0*/ top__DOT__dut__DOT__wren;
@@ -26,12 +25,18 @@ class Vtop___024root final : public VerilatedModule {
     CData/*7:0*/ top__DOT__dut__DOT__agu_ins__DOT__len;
     CData/*7:0*/ top__DOT__dut__DOT__agu_ins__DOT__j;
     CData/*7:0*/ top__DOT__dut__DOT__agu_ins__DOT__k;
-    CData/*7:0*/ __Vdly__top__DOT__dut__DOT__agu_ins__DOT__j;
+    CData/*3:0*/ top__DOT__dut__DOT__agu_intt__DOT__state;
+    CData/*3:0*/ top__DOT__dut__DOT__agu_intt__DOT__next_state;
+    CData/*7:0*/ top__DOT__dut__DOT__agu_intt__DOT__len;
+    CData/*7:0*/ top__DOT__dut__DOT__agu_intt__DOT__j;
+    CData/*7:0*/ top__DOT__dut__DOT__agu_intt__DOT__k;
     CData/*0:0*/ __Vclklast__TOP__clk_i;
     CData/*0:0*/ __Vclklast__TOP__ntt;
     SData/*8:0*/ top__DOT__dut__DOT__agu_ins__DOT__start;
+    SData/*8:0*/ top__DOT__dut__DOT__agu_intt__DOT__start;
     VL_OUT(even_debug_o,23,0);
     VL_OUT(odd_debug_o,23,0);
+    IData/*23:0*/ top__DOT__dut__DOT__tw_tmp;
     IData/*23:0*/ top__DOT__dut__DOT__in1_bfu;
     IData/*23:0*/ top__DOT__dut__DOT__in2_bfu;
     IData/*23:0*/ top__DOT__dut__DOT__out1_bfu;
